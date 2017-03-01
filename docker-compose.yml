@@ -1,0 +1,39 @@
+version: '2'
+
+services:
+
+    # APP
+
+    nginx:
+        build: docker/nginx
+        volumes:
+            - "./:/symfony"
+        links:
+            - php
+        ports:
+            - "80:80"
+
+    php:
+        build: docker/php
+        volumes:
+            - "./:/symfony"
+        links:
+            - mysql
+            - maildev
+
+    mysql:
+        build: docker/mysql
+        environment:
+            - "MYSQL_ROOT_PASSWORD=root"
+            - "MYSQL_USER=symfony"
+            - "MYSQL_PASSWORD=symfony"
+            - "MYSQL_DATABASE=symfony"
+        ports:
+            - "3306:3306"
+
+    # DEV
+
+    maildev:
+        image: djfarrelly/maildev
+        ports:
+            - "1080:80"
