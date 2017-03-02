@@ -7,6 +7,8 @@ PHP 7.1 + MYSQL 5.7 + NGINX 1.11 (+ MAILDEV)
 
     ./docker
     ./docker-compose.yml
+    
+    ./app/config/parameters.yml.dist
 
 ### docker commands
     
