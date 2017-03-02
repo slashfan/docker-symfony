@@ -1,14 +1,14 @@
 symfony + docker starter
 ========================
 
-PHP 7.1 + NGINX 1.11 + MYSQL 5.7 (+ MAILDEV)
+PHP 7.1 + MYSQL 5.7 + NGINX 1.11 (+ MAILDEV)
 
-### fles
+### important files and directories
 
     ./docker
     ./docker-compose.yml
 
-### commands
+### docker commands
     
     docker-compose build
     docker-compose up
@@ -17,19 +17,19 @@ PHP 7.1 + NGINX 1.11 + MYSQL 5.7 (+ MAILDEV)
     docker-compose stop
     docker-compose rm -v
 
-### web
+### execute php commands (from php container)
+
+    docker-compose exec php /bin/bash
+
+### mysql management (from host)
+    
+    mysql -uroot -proot --host=127.0.0.1 --port=3306
+
+### web access
 
     http://localhost:80
     http://symfony.dock
 
-### php 
-
-    docker-compose exec php /bin/bash
-
-### mysql
-    
-    mysql -uroot -proot --host=127.0.0.1 --port=3306
-
-### maildev
+### maildev access
 
     http://localhost:1080
