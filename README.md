@@ -23,7 +23,6 @@ PHP 7.1 + MYSQL 5.7 + NGINX 1.11 (+ MAILDEV)
 
     docker-compose exec php /bin/bash
     composer install -o
-    ...
 
 ### execute php commands (from host)
     
@@ -46,3 +45,9 @@ PHP 7.1 + MYSQL 5.7 + NGINX 1.11 (+ MAILDEV)
 ### maildev access
 
     http://localhost:1080
+
+### phpmyadmin access
+
+A tool like MySQL Workbench would be better in my opinion but if you really want it uncomment the phpmyadmin section in the docker-compose.yml
+
+    http://localhost:8080
