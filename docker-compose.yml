@@ -13,6 +13,17 @@ services:
         ports:
             - "80:80" # change host port depending on your needs
 
+#    nginx_pagespeed:
+#        build: docker/nginx_pagespeed
+#        volumes:
+#            - "./:/symfony"
+#        links:
+#            - php
+#        environment:
+#            - "PAGESPEED_ENABLE=on"
+#        ports:
+#            - "81:80" # change host port depending on your needs
+
     php:
         build: docker/php
         volumes:

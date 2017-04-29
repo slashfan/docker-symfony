@@ -1,7 +1,7 @@
 symfony + docker starter
 ========================
 
-PHP 7.1 + MYSQL 5.7 + NGINX 1.11 (+ MAILDEV)
+PHP 7.1 + MYSQL 5.7 + NGINX 1.11 (+ MAILDEV + PAGESPEED)
 
 ### important files and directories
 
@@ -41,6 +41,12 @@ PHP 7.1 + MYSQL 5.7 + NGINX 1.11 (+ MAILDEV)
 
     http://localhost
     http://symfony.dock
+
+### nginx + pagespeed module
+
+Uncomment the nginx_pagespeed service configuration block and modify the mapped port to suit your needs.
+
+    http://localhost:81
 
 ### maildev access
 
