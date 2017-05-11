@@ -10,8 +10,6 @@ services:
             - "./:/symfony"
         links:
             - php
-        ports:
-            - "80:80" # change host port depending on your needs
 
 #    nginx_pagespeed:
 #        build: docker/nginx_pagespeed
@@ -21,8 +19,6 @@ services:
 #            - php
 #        environment:
 #            - "PAGESPEED_ENABLE=on"
-#        ports:
-#            - "81:80" # change host port depending on your needs
 
     php:
         build: docker/php
@@ -30,7 +26,7 @@ services:
             - "./:/symfony"
         links:
             - mysql
-            - maildev
+#            - maildev
 
     mysql:
         build: docker/mysql
@@ -39,15 +35,13 @@ services:
             - "MYSQL_USER=symfony"
             - "MYSQL_PASSWORD=symfony"
             - "MYSQL_DATABASE=symfony"
-        ports:
-            - "3306:3306" # comment or change host port depending on your needs
 
     # DEV TOOLS
 
-    maildev:
-        image: djfarrelly/maildev
-        ports:
-            - "1080:80"
+#    maildev:
+#        image: djfarrelly/maildev
+#        ports:
+#            - "1080:80"
 
 #    phpmyadmin:
 #        image: phpmyadmin/phpmyadmin:4.6

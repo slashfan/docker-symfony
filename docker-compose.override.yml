@@ -1,0 +1,15 @@
+version: '2'
+
+services:
+
+    nginx:
+        ports:
+            - "80:80"
+
+#    nginx_pagespeed:
+#        ports:
+#            - "81:80"
+
+    mysql:
+        ports:
+            - "3306:3306"

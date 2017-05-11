@@ -3,12 +3,9 @@ symfony + docker starter
 
 PHP 7.1 + MYSQL 5.7 + NGINX 1.11 (+ MAILDEV + PAGESPEED)
 
-### important files and directories
+### usage
 
-    ./docker
-    ./docker-compose.yml
-    
-    ./app/config/parameters.yml.dist
+copy this repository files and directory at the root of the symfony project
 
 ### docker commands
     
