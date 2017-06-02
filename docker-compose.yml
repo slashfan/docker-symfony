@@ -6,8 +6,8 @@ services:
 
     nginx:
         build: docker/nginx
-        volumes:
-            - "./:/symfony"
+        volumes_from:
+            - php
         links:
             - php
 
@@ -22,4 +22,8 @@ services:
         build: docker/mysql
         environment:
             - "MYSQL_ROOT_PASSWORD=root"
+        volumes:
+            - "mysql:/var/lib/mysql"
 
+volumes:
+  mysql: ~
