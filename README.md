@@ -1,7 +1,7 @@
 symfony + docker starter
 ========================
 
-PHP 7.1 + MYSQL 5.7 + NGINX 1.11 (+ MAILDEV + PAGESPEED)
+PHP 7.1 + MYSQL 5.7 + NGINX 1.11 (+ MAILDEV + PHPMYADMIN + PAGESPEED)
 
 ### usage
 
