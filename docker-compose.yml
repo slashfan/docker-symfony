@@ -6,19 +6,10 @@ services:
 
     nginx:
         build: docker/nginx
-        volumes:
-            - "./:/symfony"
+        volumes_from:
+            - php
         links:
             - php
-
-#    nginx_pagespeed:
-#        build: docker/nginx_pagespeed
-#        volumes:
-#            - "./:/symfony"
-#        links:
-#            - php
-#        environment:
-#            - "PAGESPEED_ENABLE=on"
 
     php:
         build: docker/php
@@ -26,30 +17,13 @@ services:
             - "./:/symfony"
         links:
             - mysql
-#            - maildev
 
     mysql:
         build: docker/mysql
         environment:
             - "MYSQL_ROOT_PASSWORD=root"
-            - "MYSQL_USER=symfony"
-            - "MYSQL_PASSWORD=symfony"
-            - "MYSQL_DATABASE=symfony"
+        volumes:
+            - "mysql:/var/lib/mysql"
 
-    # DEV TOOLS
-
-#    maildev:
-#        image: djfarrelly/maildev
-#        ports:
-#            - "1080:80"
-
-#    phpmyadmin:
-#        image: phpmyadmin/phpmyadmin:4.6
-#        environment:
-#            - "MYSQL_ROOT_PASSWORD=root"
-#            - "MYSQL_USER=symfony"
-#            - "MYSQL_PASSWORD=symfony"
-#        links:
-#            - mysql:db
-#        ports:
-#            - "8080:80"
+volumes:
+  mysql: ~
