@@ -1,55 +1,53 @@
-version: '2'
+version: '3.3'
 
 services:
 
     # APP
 
-    nginx:
-        build: docker/nginx
+    php:
+        build: .docker/php
         volumes:
             - "./:/symfony"
-        links:
+        depends_on:
+            - mysql
+            - maildev
+        env_file:
+            - ".docker/.env"
+
+    nginx:
+        build: .docker/nginx
+        volumes:
+            - "./:/symfony"
+        depends_on:
             - php
 
-#    nginx_pagespeed:
-#        build: docker/nginx_pagespeed
-#        volumes:
-#            - "./:/symfony"
-#        links:
-#            - php
-#        environment:
-#            - "PAGESPEED_ENABLE=on"
-
-    php:
-        build: docker/php
-        volumes:
-            - "./:/symfony"
-        links:
-            - mysql
-#            - maildev
-
     mysql:
-        build: docker/mysql
-        environment:
-            - "MYSQL_ROOT_PASSWORD=root"
-            - "MYSQL_USER=symfony"
-            - "MYSQL_PASSWORD=symfony"
-            - "MYSQL_DATABASE=symfony"
+        build: .docker/mysql
+        env_file:
+            - ".docker/.env"
 
     # DEV TOOLS
 
-#    maildev:
-#        image: djfarrelly/maildev
-#        ports:
-#            - "1080:80"
+    maildev:
+        image: djfarrelly/maildev
+
+    blackfire:
+        image: blackfire/blackfire
+        env_file:
+            - ".docker/.env"
+
+#    nginx_pagespeed:
+#        build: .docker/nginx_pagespeed
+#        volumes:
+#            - "./:/symfony"
+#        depends_on:
+#            - php
+#        env_file:
+#            - ".docker/.env"
 
 #    phpmyadmin:
 #        image: phpmyadmin/phpmyadmin:4.6
-#        environment:
-#            - "MYSQL_ROOT_PASSWORD=root"
-#            - "MYSQL_USER=symfony"
-#            - "MYSQL_PASSWORD=symfony"
 #        links:
-#            - mysql:db
-#        ports:
-#            - "8080:80"
+#            - "mysql:db"
+#        env_file:
+#            - ".docker/.env"

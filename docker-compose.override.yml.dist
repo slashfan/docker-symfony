@@ -1,4 +1,4 @@
-version: '2'
+version: '3.3'
 
 services:
 
@@ -6,10 +6,18 @@ services:
         ports:
             - "80:80"
 
-#    nginx_pagespeed:
-#        ports:
-#            - "81:80"
-
     mysql:
         ports:
             - "3306:3306"
+
+    maildev:
+        ports:
+            - "1080:80"
+
+#    phpmyadmin:
+#        ports:
+#            - "8080:80"
+
+#    nginx_pagespeed:
+#        ports:
+#            - "81:80"
