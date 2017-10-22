@@ -1,7 +1,7 @@
-Docker starter for PHP / Symfony development
-============================================
+Docker PHP / Symfony starter
+============================ 
 
-PHP 7.1 + MYSQL 5.7 + NGINX 1.11 (+ BLACKFIRE + MAILDEV + PHPMYADMIN + PAGESPEED)
+PHP 7.1 + MYSQL (5.7) + NGINX (1.11) (+ BLACKFIRE + NODEJS + YARN + MAILDEV + PAGESPEED + PHPMYADMIN).
 
 ### usage
 
