@@ -1,6 +1,6 @@
 FROM php:7.1-fpm
 
-ENV NODE_VERSION=8.7.0
+ENV NODE_VERSION=8.9.0
 
 RUN apt-get update && apt-get install -y \
     git \
