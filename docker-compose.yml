@@ -1,53 +1,53 @@
-version: '3.3'
+version: '3'
 
 services:
 
     # APP
 
     php:
-        build: .docker/php
+        build: docker/php
         volumes:
             - "./:/symfony"
         depends_on:
             - mysql
             - maildev
         env_file:
-            - ".docker/.env"
+            - "docker/.env"
 
     nginx:
-        build: .docker/nginx
+        build: docker/nginx
         volumes:
             - "./:/symfony"
         depends_on:
             - php
 
     mysql:
-        build: .docker/mysql
+        build: docker/mysql
         env_file:
-            - ".docker/.env"
+            - "docker/.env"
 
     # DEV TOOLS
 
     maildev:
         image: djfarrelly/maildev
 
-    blackfire:
-        image: blackfire/blackfire
-        env_file:
-            - ".docker/.env"
+#    blackfire:
+#        image: blackfire/blackfire
+#        env_file:
+#            - "docker/.env"
 
 #    nginx_pagespeed:
-#        build: .docker/nginx_pagespeed
+#        build: docker/nginx_pagespeed
 #        volumes:
 #            - "./:/symfony"
 #        depends_on:
 #            - php
 #        env_file:
-#            - ".docker/.env"
+#            - "docker/.env"
 
 #    phpmyadmin:
 #        image: phpmyadmin/phpmyadmin:4.6
 #        links:
 #            - "mysql:db"
 #        env_file:
-#            - ".docker/.env"
+#            - "docker/.env"

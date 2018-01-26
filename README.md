@@ -1,11 +1,12 @@
 Docker PHP / Symfony starter
 ============================ 
 
-PHP 7.1 + MYSQL (5.7) + NGINX (1.11) (+ BLACKFIRE + NODEJS + YARN + MAILDEV + PAGESPEED + PHPMYADMIN).
+PHP 7.1 + MYSQL 5.7 + NGINX 1.12 (+ BLACKFIRE + NODEJS + YARN + MAILDEV + PAGESPEED + PHPMYADMIN).
 
 ### usage
 
-Copy this repository files and directory at the root of the symfony project. Don't forget to copy the .docker/.env.dist file to .docker/.env.
+Copy this repository files and directory at the root of the symfony project. 
+Don't forget to copy the docker/.env.dist file to docker/.env.
 
 ### docker commands
     
@@ -44,11 +45,13 @@ Copy this repository files and directory at the root of the symfony project. Don
 ### web access
 
     http://localhost
-    http://symfony.dock
+    http://symfony.dock (by adding an entry "127.0.0.1 symfony.dock" to the host /etc/hosts file)
 
 ### blackfire usage
 
-Configure your blackfire credentials in the .docker/.env file. See https://blackfire.io/docs/integrations/docker for more informations.
+Configure your blackfire credentials in the docker/.env file. 
+Uncomment the blackfire part in the docker-compose-yml and docker/php/Dockerfile files.
+See https://blackfire.io/docs/integrations/docker for more informations.
 
     # from host
     docker-compose exec blackfire blackfire curl http://nginx
@@ -70,6 +73,6 @@ Uncomment the nginx_pagespeed service configuration block and modify the mapped 
 
 ### phpmyadmin access
 
-A tool like MySQL Workbench would be better in my opinion but if you really want it uncomment the phpmyadmin section in the docker-compose.yml
+A tool like MySQL Workbench would be better but if you really want it uncomment the phpmyadmin section in the docker-compose.yml
 
     http://localhost:8080
