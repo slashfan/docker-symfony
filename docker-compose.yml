@@ -21,6 +21,13 @@ services:
         depends_on:
             - php
 
+#    httpd:
+#        build: docker/httpd
+#        volumes:
+#            - "./:/symfony"
+#        depends_on:
+#            - php
+
     mysql:
         build: docker/mysql
         env_file:
