@@ -1,7 +1,7 @@
 Docker PHP / Symfony starter
 ============================ 
 
-PHP 7.1 + MYSQL 5.7 + NGINX 1.12 (+ BLACKFIRE + NODEJS + YARN + MAILDEV + PAGESPEED + PHPMYADMIN).
+PHP 7.1 + MYSQL 5.7 + NGINX 1.12 (+ BLACKFIRE + NODEJS + YARN + MAILDEV + APACHE HTTPD + NGINX PAGESPEED + PHPMYADMIN).
 
 ### usage
 
@@ -10,22 +10,26 @@ Don't forget to copy the docker/.env.dist file to docker/.env.
 
 ### docker commands
     
-    # start
+    # start (and build) containers
     docker-compose up
+    docker-compose up --build
     docker-compose up -d
     
-    # stop
+    # stop running containers
     docker-compose stop
     
-    # cleanup
+    # cleanup containers and volumes
     docker-compose rm -v
     
-    # logs
+    # display container logs
     docker-compose logs mysql
+    
+    # go into container shell
+    docker-compose exec mysql /bin/bash
 
 ### execute php commands
 
-    # from php container
+    # from inside php container
     docker-compose exec php /bin/bash
     composer install -o
 
@@ -34,11 +38,11 @@ Don't forget to copy the docker/.env.dist file to docker/.env.
 
 ### mysql interaction
     
-    # from mysql container
+    # from inside mysql container
     docker-compose exec mysql /bin/bash
     mysql -uroot -p
 
-    # from host
+    # from host (mysql client required)
     mysql -uroot -p --host=127.0.0.1 --port=3306
     docker-compose exec mysql sh -c 'exec mysqldump -u"$MYSQL_USER" -p"$MYSQL_PASSWORD" "$MYSQL_DATABASE"' > ./dump.sql
 
@@ -64,6 +68,10 @@ See https://blackfire.io/docs/integrations/docker for more informations.
 ### maildev access
 
     http://localhost:1080
+
+### apache httpd
+
+Uncomment the httpd sections of the docker-compose.yml and docker-compose.override.yml files.
 
 ### nginx + pagespeed module
 
