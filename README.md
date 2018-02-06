@@ -71,7 +71,7 @@ See https://blackfire.io/docs/integrations/docker for more informations.
 
 ### apache httpd
 
-Uncomment the httpd sections of the docker-compose.yml and docker-compose.override.yml files.
+Uncomment the httpd sections of the docker-compose.yml file and adapat the mapped ports in the docker-compose.override.yml file.
 
 ### nginx + pagespeed module
 
