@@ -13,46 +13,49 @@ RUN rm /etc/localtime \
     && ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime \
     && "date"
 
-# Install APCU
+# Install APCU extension
 RUN pecl install apcu \
     && echo "extension=apcu.so" > /usr/local/etc/php/conf.d/apcu.ini
 
-# Install OPCACHE
+# Install OPCACHE extension
 RUN docker-php-ext-install opcache
 
-# Install GD
+# Install GD extension
 RUN apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libpng12-dev \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install gd
 
-# Install MBSTRING
+# Install MBSTRING extension
 RUN docker-php-ext-install mbstring
 
-# Install MCRYPT
+# Install MCRYPT extension
 RUN apt-get install -y libmcrypt-dev \
     && docker-php-ext-install mcrypt
 
-# Install PDO
+# Install PDO extension
 RUN apt-get install -y libsqlite3-dev \
     && docker-php-ext-install pdo pdo_mysql pdo_sqlite
 
-# Install INTL
+# Install INTL extension
 RUN apt-get install -y libicu-dev \
     && docker-php-ext-configure intl \
     && docker-php-ext-install intl
 
-# Install BCMATH
+# Install BCMATH extension
 RUN docker-php-ext-install bcmath
 
-# Install ZIP
+# Install ZIP extension
 RUN docker-php-ext-install zip
 
-# Install EXIF
+# Install EXIF extension
 RUN docker-php-ext-install exif
 
-# Install XSL
+# Install XSL extension
 RUN apt-get install -y libxslt-dev \
     && docker-php-ext-install xsl
+
+# Install SOAP extension
+RUN docker-php-ext-install soap
 
 # Install COMPOSER
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
