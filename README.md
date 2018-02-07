@@ -1,92 +1,96 @@
+
 Docker PHP / Symfony starter
-============================ 
+============================
 
-PHP 7.1 + MYSQL 5.7 + NGINX 1.12 (+ MAILDEV + BLACKFIRE + NODEJS + YARN + APACHE HTTPD 2.4 + NGINX PAGESPEED + PHPMYADMIN).
+This repository aims to be a **starting point docker configuration** for any php project (*symfony*, *drupal*, *wordpress*...). 
 
-### usage
+### What's inside ?
 
-Copy this repository files and directory at the root of the symfony project. 
-Don't forget to copy the docker/.env.dist file to docker/.env.
+| CONTAINER | NOTES |
+|--|--|
+| PHP 7.1 | composer, commonly required extensions, nodejs 8.9 + yarn, blackfire probe + agent |
+| NGINX 1.12 | - |
+| MYSQL 5.7 | - |
+| MAILDEV | - |
+| HTTPD 2.4 | optional, disabled by default |
+| BLACKFIRE | optional, disabled by default |
+| NGINX PAGESPEED | optional, disabled by default |
+| PHPMYADMIN | optional, disabled by default |
 
-### docker commands cheatsheet
+### How to use this repository ?
+
+ 1. **Copy** this repository files and directory at the root of your php project.
+ 2. **Copy** the *docker-compose.override.yml.dist* to *docker-compose.override.yml* and the  *docker/.env.dist* file to *docker/.env*.
+ 3. **Add** the *docker-compose.override.yml* and *docker/.env* files to *.gitignore*.
+
+### Docker commands cheatsheet
     
-    # build containers
-    docker-compose build
-    
-    # build and start containers in foreground (recommended)
+#### Start containers (and build if needed)
     docker-compose up --build
-    # start containers in foreground
-    docker-compose up
-    # start containers in background
-    docker-compose up -d
     
-    # stop running containers
-    docker-compose stop
-    docker-compose down
-    
-    # stop and remove containers, networks and volumes (cleanup)
+#### Stop and remove containers, networks and volumes
     docker-compose down -v
     
-    # display and follow container logs
+#### Display and follow logs of a container
     docker-compose logs -f mysql
     
-    # go into container shell
+#### Get an interactive prompt for a container
     docker-compose exec mysql /bin/bash
 
-### execute php commands
+### Interact with PHP
 
-    # from inside php container
+#### From container
     docker-compose exec php /bin/bash
     composer install -o
 
-    # from host
+#### From host
     docker-compose exec php composer install -o
 
-### mysql interaction
+### Interact with MySQL
     
-    # from inside mysql container
+#### From container
     docker-compose exec mysql /bin/bash
     mysql -uroot -p
 
-    # from host (mysql client required)
+#### From host (mysql client required)
     mysql -uroot -p --host=127.0.0.1 --port=3306
     docker-compose exec mysql sh -c 'exec mysqldump -u"$MYSQL_USER" -p"$MYSQL_PASSWORD" "$MYSQL_DATABASE"' > ./dump.sql
 
-### web access
+### Web access
 
     http://localhost
     http://symfony.dock (by adding an entry "127.0.0.1 symfony.dock" to the host /etc/hosts file)
 
-### blackfire usage
+### Maildev access
 
-Configure your blackfire credentials in the docker/.env file. 
-Uncomment the blackfire part in the docker-compose-yml and docker/php/Dockerfile files.
+    http://localhost:1080
+
+### Blackfire usage
+
+Configure your blackfire credentials in the *docker/.env* file. 
+Uncomment the **blackfire section** in the *docker-compose.yml* and *docker/php/Dockerfile* files.
 See https://blackfire.io/docs/integrations/docker for more informations.
 
-    # from host
+#### From host
     docker-compose exec blackfire blackfire curl http://nginx
     
-    # from php container
+#### From container
     docker-compose exec php /bin/bash
     blackfire run php script.php
     blackfire curl http://nginx
 
-### maildev access
+### Apache httpd
 
-    http://localhost:1080
+Uncomment the **httpd section** of the *docker-compose.yml* file and adapt the mapped ports in the *docker-compose.override.yml* file.
 
-### apache httpd
+### Nginx + PageSpeed module
 
-Uncomment the httpd sections of the docker-compose.yml file and adapat the mapped ports in the docker-compose.override.yml file.
-
-### nginx + pagespeed module
-
-Uncomment the nginx_pagespeed service configuration block and modify the mapped port to suit your needs.
+Uncomment the **nginx_pagespeed section** of the *docker-compose.yml* file and modify the mapped port to suit your needs.
 
     http://localhost:81
 
-### phpmyadmin access
+### phpMyAdmin 
 
-A tool like MySQL Workbench would be better but if you really want it uncomment the phpmyadmin section in the docker-compose.yml
+A tool like MySQL Workbench would be better but if you really want it uncomment the **phpmyadmin section** in the *docker-compose.yml* file.
 
     http://localhost:8080
