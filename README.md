@@ -8,21 +8,27 @@ PHP 7.1 + MYSQL 5.7 + NGINX 1.12 (+ MAILDEV + BLACKFIRE + NODEJS + YARN + APACHE
 Copy this repository files and directory at the root of the symfony project. 
 Don't forget to copy the docker/.env.dist file to docker/.env.
 
-### docker commands
+### docker commands cheatsheet
     
-    # start (and build) containers
-    docker-compose up
+    # build containers
+    docker-compose build
+    
+    # build and start containers in foreground (recommended)
     docker-compose up --build
+    # start containers in foreground
+    docker-compose up
+    # start containers in background
     docker-compose up -d
     
     # stop running containers
     docker-compose stop
+    docker-compose down
     
-    # cleanup containers and volumes
-    docker-compose rm -v
+    # stop and remove containers, networks and volumes (cleanup)
+    docker-compose down -v
     
-    # display container logs
-    docker-compose logs mysql
+    # display and follow container logs
+    docker-compose logs -f mysql
     
     # go into container shell
     docker-compose exec mysql /bin/bash
