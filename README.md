@@ -29,7 +29,7 @@ This repository aims to be a **starting point docker configuration** for any php
     docker-compose up --build
     
 #### Stop and remove containers, networks and volumes
-    docker-compose down -v
+    docker-compose down --volumes --remove-orphans
     
 #### Display and follow logs of a container
     docker-compose logs -f mysql
@@ -59,7 +59,7 @@ This repository aims to be a **starting point docker configuration** for any php
 ### Web access
 
     http://localhost
-    http://symfony.dock (by adding an entry "127.0.0.1 symfony.dock" to the host /etc/hosts file)
+    http://project.dock (by adding an entry "127.0.0.1 project.dock" to the host /etc/hosts file)
 
 ### Maildev access
 
