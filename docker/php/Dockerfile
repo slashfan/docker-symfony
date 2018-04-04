@@ -93,10 +93,10 @@ RUN yes | pecl install xdebug \
 #    && mv /tmp/blackfire/blackfire /usr/bin/blackfire \
 #    && rm -Rf /tmp/blackfire
 
-# Set SYMFONY USER
-RUN useradd -ms /bin/bash symfony
-USER symfony
-WORKDIR /symfony
+# Set PROJECT USER
+RUN useradd -ms /bin/bash project
+USER project
+WORKDIR /project
 
 COPY conf/php-fpm.conf /etc/php-fpm.conf
 COPY conf/php.ini /usr/local/etc/php/conf.d/100-php.ini

@@ -2,20 +2,23 @@
 Docker PHP / Symfony starter
 ============================
 
-This repository aims to be a **starting point docker configuration** for any php project (*symfony*, *drupal*, *wordpress*...). 
+**Starting point** Docker configuration for PHP projects (*symfony*, *drupal*, *wordpress*...). 
 
 ### What's inside ?
 
 | CONTAINER | NOTES |
 |--|--|
-| PHP 7.1 | composer, commonly required extensions, nodejs 8.9 + yarn, blackfire probe + agent |
-| NGINX 1.12 | - |
-| MYSQL 5.7 | - |
-| MAILDEV | - |
-| HTTPD 2.4 | optional, disabled by default |
-| BLACKFIRE | optional, disabled by default |
-| NGINX PAGESPEED | optional, disabled by default |
-| PHPMYADMIN | optional, disabled by default |
+| **PHP 7.1** | enabled |
+| **NGINX 1.12** | enabled |
+| MYSQL 5.7 | enabled |
+| MAILDEV | enabled |
+
+| CONTAINER | NOTES |
+|--|--|
+| HTTPD 2.4 | optional, disabled |
+| NGINX PAGESPEED | optional, disabled |
+| BLACKFIRE | optional, disabled |
+| PHPMYADMIN | optional, disabled |
 
 ### How to use this repository ?
 
@@ -26,40 +29,48 @@ This repository aims to be a **starting point docker configuration** for any php
 ### Docker commands cheatsheet
     
 #### Start containers (and build if needed)
-    docker-compose up --build
-    
+```bash
+$ docker-compose up --build
+```
 #### Stop and remove containers, networks and volumes
-    docker-compose down -v
-    
+```bash
+$ docker-compose down --volumes --remove-orphans
+```
 #### Display and follow logs of a container
-    docker-compose logs -f mysql
-    
+```bash
+$ docker-compose logs -f mysql
+```
 #### Get an interactive prompt for a container
-    docker-compose exec mysql /bin/bash
-
+```bash
+$ docker-compose exec mysql /bin/bash
+```
 ### Interact with PHP
 
 #### From container
-    docker-compose exec php /bin/bash
-    composer install -o
-
+```bash
+$ docker-compose exec php /bin/bash
+$ composer install
+```
 #### From host
-    docker-compose exec php composer install -o
-
+```bash
+$ docker-compose exec php composer install
+```
 ### Interact with MySQL
     
 #### From container
-    docker-compose exec mysql /bin/bash
-    mysql -uroot -p
-
+```bash
+$ docker-compose exec mysql /bin/bash
+$ mysql -uroot -p
+```
 #### From host (mysql client required)
-    mysql -uroot -p --host=127.0.0.1 --port=3306
-    docker-compose exec mysql sh -c 'exec mysqldump -u"$MYSQL_USER" -p"$MYSQL_PASSWORD" "$MYSQL_DATABASE"' > ./dump.sql
-
+```bash
+$ mysql -uroot -p --host=127.0.0.1 --port=3306
+$ docker-compose exec mysql sh -c 'exec mysqldump -u"$MYSQL_USER" -p"$MYSQL_PASSWORD" "$MYSQL_DATABASE"' > ./dump.sql
+```
 ### Web access
 
-    http://localhost
-    http://symfony.dock (by adding an entry "127.0.0.1 symfony.dock" to the host /etc/hosts file)
+    http://localhost (no extra step needed)
+    http://project.dock (add an entry "127.0.0.1 project.dock" to the host /etc/hosts file)
 
 ### Maildev access
 
@@ -72,13 +83,15 @@ Uncomment the **blackfire section** in the *docker-compose.yml* and *docker/php/
 See https://blackfire.io/docs/integrations/docker for more informations.
 
 #### From host
-    docker-compose exec blackfire blackfire curl http://nginx
-    
+```bash
+docker-compose exec blackfire blackfire curl http://nginx
+```    
 #### From container
-    docker-compose exec php /bin/bash
-    blackfire run php script.php
-    blackfire curl http://nginx
-
+```bash
+$ docker-compose exec php /bin/bash
+$ blackfire run php script.php
+$ blackfire curl http://nginx
+```
 ### Apache httpd
 
 Uncomment the **httpd section** of the *docker-compose.yml* file and adapt the mapped ports in the *docker-compose.override.yml* file.

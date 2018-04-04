@@ -7,7 +7,7 @@ services:
     php:
         build: docker/php
         volumes:
-            - "./:/symfony"
+            - "./:/project"
         depends_on:
             - mysql
             - maildev
@@ -17,14 +17,14 @@ services:
     nginx:
         build: docker/nginx
         volumes:
-            - "./:/symfony"
+            - "./:/project"
         depends_on:
             - php
 
 #    httpd:
 #        build: docker/httpd
 #        volumes:
-#            - "./:/symfony"
+#            - "./:/project"
 #        depends_on:
 #            - php
 
@@ -46,7 +46,7 @@ services:
 #    nginx_pagespeed:
 #        build: docker/nginx_pagespeed
 #        volumes:
-#            - "./:/symfony"
+#            - "./:/project"
 #        depends_on:
 #            - php
 #        env_file:
