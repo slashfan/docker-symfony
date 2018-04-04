@@ -74,13 +74,8 @@ RUN apt-get install -y apt-transport-https \
     && apt-get update \
     && apt-get install yarn
 
-# Install XDEBUG
-RUN pecl install xdebug
-#    && docker-php-ext-enable xdebug \
-#    && echo "xdebug.remote_enable=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-#    && echo "xdebug.remote_connect_back=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-#    && echo "xdebug.idekey=\"PHPSTORM\"" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-#    && echo "xdebug.remote_port=9001" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+# Install & Enable XDEBUG
+RUN pecl install xdebug && docker-php-ext-enable xdebug
 
 # Install BLACKFIRE PROBE
 #RUN version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") \

@@ -82,6 +82,10 @@ Configure your blackfire credentials in the *docker/.env* file.
 Uncomment the **blackfire section** in the *docker-compose.yml* and *docker/php/Dockerfile* files.
 See https://blackfire.io/docs/integrations/docker for more informations.
 
+### xdebug usage
+Xdebug is enabled by default. However, it is necessary to use a browser's extension to catch it.
+Example of extensions for Google Chrome: [xdebug helper](https://chrome.google.com/webstore/detail/xdebug-helper/eadndfjplgieldjbigjakmdgkmoaaaoc)
+
 #### From host
 ```bash
 docker-compose exec blackfire blackfire curl http://nginx
