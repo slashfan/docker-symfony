@@ -21,7 +21,3 @@ services:
 #    phpmyadmin:
 #        ports:
 #            - "8080:80"
-
-#    nginx_pagespeed:
-#        ports:
-#            - "81:80"

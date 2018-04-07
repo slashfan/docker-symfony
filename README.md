@@ -8,15 +8,17 @@ Docker PHP / Symfony starter
 
 | CONTAINER | NOTES |
 |--|--|
-| **PHP 7.1** | enabled |
+| **PHP 7.2** | enabled |
 | **NGINX 1.12** | enabled |
-| MYSQL 5.7 | enabled |
-| MAILDEV | enabled |
+| **MYSQL 5.7** | enabled |
+| **NODE 8.11** | enabled |
+| **MAILDEV** | enabled |
 
 | CONTAINER | NOTES |
 |--|--|
-| HTTPD 2.4 | optional, disabled |
+| PHP 7.1 | optional, disabled |
 | NGINX PAGESPEED | optional, disabled |
+| HTTPD 2.4 | optional, disabled |
 | BLACKFIRE | optional, disabled |
 | PHPMYADMIN | optional, disabled |
 
@@ -28,8 +30,13 @@ Docker PHP / Symfony starter
 
 ### Docker commands cheatsheet
     
+#### Build containers (and pull latest images)
+```bash
+$ docker-compose build --pull
+```
 #### Start containers (and build if needed)
 ```bash
+$ docker-compose build --pull
 $ docker-compose up --build
 ```
 #### Stop and remove containers, networks and volumes
@@ -70,11 +77,16 @@ $ docker-compose exec mysql sh -c 'exec mysqldump -u"$MYSQL_USER" -p"$MYSQL_PASS
 ### Web access
 
     http://localhost (no extra step needed)
-    http://project.dock (add an entry "127.0.0.1 project.dock" to the host /etc/hosts file)
+    http://project.tld (add an entry "127.0.0.1 project.tld" to the host /etc/hosts file)
 
 ### Maildev access
 
     http://localhost:1080
+
+### Xdebug usage
+
+Xdebug is enabled by default. However, it is necessary to use a browser's extension to catch it.
+Example of extensions for Google Chrome: [xdebug helper](https://chrome.google.com/webstore/detail/xdebug-helper/eadndfjplgieldjbigjakmdgkmoaaaoc)
 
 ### Blackfire usage
 
@@ -82,13 +94,9 @@ Configure your blackfire credentials in the *docker/.env* file.
 Uncomment the **blackfire section** in the *docker-compose.yml* and *docker/php/Dockerfile* files.
 See https://blackfire.io/docs/integrations/docker for more informations.
 
-### xdebug usage
-Xdebug is enabled by default. However, it is necessary to use a browser's extension to catch it.
-Example of extensions for Google Chrome: [xdebug helper](https://chrome.google.com/webstore/detail/xdebug-helper/eadndfjplgieldjbigjakmdgkmoaaaoc)
-
 #### From host
 ```bash
-docker-compose exec blackfire blackfire curl http://nginx
+$ docker-compose exec blackfire blackfire curl http://nginx
 ```    
 #### From container
 ```bash
@@ -99,12 +107,6 @@ $ blackfire curl http://nginx
 ### Apache httpd
 
 Uncomment the **httpd section** of the *docker-compose.yml* file and adapt the mapped ports in the *docker-compose.override.yml* file.
-
-### Nginx + PageSpeed module
-
-Uncomment the **nginx_pagespeed section** of the *docker-compose.yml* file and modify the mapped port to suit your needs.
-
-    http://localhost:81
 
 ### phpMyAdmin 
 
