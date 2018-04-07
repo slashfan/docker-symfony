@@ -6,10 +6,6 @@ services:
 
     php:
         build: docker/php
-#        uncomment the following lines to use php 7.1
-#        build:
-#            context: docker/php
-#            dockerfile: Dockerfile-7.1
         volumes:
             - "./:/project"
         depends_on:
@@ -20,24 +16,20 @@ services:
 
     nginx:
         build: docker/nginx
-#        uncomment the following lines to use nginx with pagespeed module
-#        build:
-#            context: docker/nginx
-#            dockerfile: Dockerfile-pagespeed
         volumes:
             - "./:/project"
         depends_on:
             - php
 
-    mysql:
-        build: docker/mysql
-        env_file:
-            - "docker/.env"
-
     node:
         build: docker/node
         volumes:
             - "./:/project"
+
+    mysql:
+        build: docker/mysql
+        env_file:
+            - "docker/.env"
 
     # ALTERNATIVES SERVICES
 
