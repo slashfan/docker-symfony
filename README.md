@@ -16,8 +16,6 @@ Docker PHP / Symfony starter
 
 | CONTAINER | NOTES |
 |--|--|
-| PHP 7.1 | optional, disabled |
-| NGINX PAGESPEED | optional, disabled |
 | HTTPD 2.4 | optional, disabled |
 | BLACKFIRE | optional, disabled |
 | PHPMYADMIN | optional, disabled |
@@ -31,49 +29,66 @@ Docker PHP / Symfony starter
 ### Docker commands cheatsheet
     
 #### Build containers (and pull latest images)
+
 ```bash
 $ docker-compose build --pull
 ```
+
 #### Start containers (and build if needed)
+
 ```bash
-$ docker-compose build --pull
 $ docker-compose up --build
 ```
+
 #### Stop and remove containers, networks and volumes
+
 ```bash
 $ docker-compose down --volumes --remove-orphans
 ```
+
 #### Display and follow logs of a container
+
 ```bash
 $ docker-compose logs -f mysql
 ```
+
 #### Get an interactive prompt for a container
+
 ```bash
 $ docker-compose exec mysql /bin/bash
 ```
+
 ### Interact with PHP
 
 #### From container
+
 ```bash
 $ docker-compose exec php /bin/bash
 $ composer install
 ```
+
 #### From host
+
 ```bash
 $ docker-compose exec php composer install
 ```
+
 ### Interact with MySQL
     
 #### From container
+
 ```bash
 $ docker-compose exec mysql /bin/bash
 $ mysql -uroot -p
 ```
+
 #### From host (mysql client required)
+
 ```bash
 $ mysql -uroot -p --host=127.0.0.1 --port=3306
 $ docker-compose exec mysql sh -c 'exec mysqldump -u"$MYSQL_USER" -p"$MYSQL_PASSWORD" "$MYSQL_DATABASE"' > ./dump.sql
 ```
+
 ### Web access
 
     http://localhost (no extra step needed)
@@ -95,15 +110,19 @@ Uncomment the **blackfire section** in the *docker-compose.yml* and *docker/php/
 See https://blackfire.io/docs/integrations/docker for more informations.
 
 #### From host
+
 ```bash
 $ docker-compose exec blackfire blackfire curl http://nginx
 ```    
+
 #### From container
+
 ```bash
 $ docker-compose exec php /bin/bash
 $ blackfire run php script.php
 $ blackfire curl http://nginx
 ```
+
 ### Apache httpd
 
 Uncomment the **httpd section** of the *docker-compose.yml* file and adapt the mapped ports in the *docker-compose.override.yml* file.
