@@ -52,9 +52,6 @@ RUN docker-php-ext-install mysqli
 # Install PDO MYSQL extension
 RUN docker-php-ext-install pdo_mysql
 
-# Install BCMATH extension
-RUN docker-php-ext-install bcmath
-
 # Install ZIP extension
 RUN apt-get install -y libzip-dev zip \
   && docker-php-ext-configure zip --with-libzip \
@@ -66,6 +63,13 @@ RUN apt-get install -y libxslt-dev \
 
 # Install SOAP extension
 RUN docker-php-ext-install soap
+
+# Install BCMATH extension
+RUN docker-php-ext-install bcmath
+
+# Install GMP extension
+RUN apt-get install -y libgmp-dev \
+    && docker-php-ext-install gmp
 
 # Install XDEBUG extension
 RUN pecl install xdebug \
