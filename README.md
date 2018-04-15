@@ -1,8 +1,8 @@
 
-Docker PHP / Symfony starter
-============================
+Docker Symfony
+==============
 
-**Starting point** Docker configuration for PHP projects (*symfony*, *drupal*, *wordpress*...). 
+**Starting point** Docker configuration for **Symfony** and other PHP projects (*drupal*, *wordpress*...). 
 
 ### What's inside ?
 
