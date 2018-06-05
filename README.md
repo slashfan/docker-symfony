@@ -23,8 +23,8 @@ Docker Symfony
 ### How to use this repository ?
 
  1. **Copy** this repository files and directory at the root of your php project.
- 2. **Copy** the *docker-compose.override.yml.dist* to *docker-compose.override.yml* and the  *docker/.env.dist* file to *docker/.env*.
- 3. **Add** the *docker-compose.override.yml* and *docker/.env* files to *.gitignore*.
+ 2. **Copy** the *docker-compose.override.yml.dist* file to *docker-compose.override.yml*.
+ 3. **Add** the *docker-compose.override.yml* file to *.gitignore*.
 
 ### Docker commands cheatsheet
     
@@ -89,10 +89,14 @@ $ mysql -uroot -p --host=127.0.0.1 --port=3306
 $ docker-compose exec mysql sh -c 'exec mysqldump -u"$MYSQL_USER" -p"$MYSQL_PASSWORD" "$MYSQL_DATABASE"' > ./dump.sql
 ```
 
-### Web access
+### Web access through NGINX
 
     http://localhost (no extra step needed)
     http://project.tld (add an entry "127.0.0.1 project.tld" to the host /etc/hosts file)
+
+### Web access through Apache httpd
+
+Uncomment the **httpd section** of the *docker-compose.yml* file and adapt the mapped ports in the *docker-compose.override.yml* file.
 
 ### Maildev access
 
@@ -122,10 +126,6 @@ $ docker-compose exec php /bin/bash
 $ blackfire run php script.php
 $ blackfire curl http://nginx
 ```
-
-### Apache httpd
-
-Uncomment the **httpd section** of the *docker-compose.yml* file and adapt the mapped ports in the *docker-compose.override.yml* file.
 
 ### phpMyAdmin 
 

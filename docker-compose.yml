@@ -11,8 +11,6 @@ services:
         depends_on:
             - mysql
             - maildev
-        env_file:
-            - "docker/.env"
 
     nginx:
         build: docker/nginx
@@ -28,8 +26,6 @@ services:
 
     mysql:
         build: docker/mysql
-        env_file:
-            - "docker/.env"
 
     # ALTERNATIVES SERVICES
 
@@ -47,8 +43,6 @@ services:
 
 #    blackfire:
 #        image: blackfire/blackfire
-#        env_file:
-#            - "docker/.env"
 
 #    phpmyadmin:
 #        image: phpmyadmin/phpmyadmin:4.7
@@ -56,5 +50,3 @@ services:
 #            - mysql
 #        links:
 #            - "mysql:db"
-#        env_file:
-#            - "docker/.env"

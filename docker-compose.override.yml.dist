@@ -2,6 +2,13 @@ version: '3'
 
 services:
 
+#    php:
+#        environment:
+#          - "BLACKFIRE_CLIENT_ID=1"
+#          - "BLACKFIRE_CLIENT_TOKEN=1"
+#          - "BLACKFIRE_SERVER_ID=1"
+#          - "BLACKFIRE_SERVER_TOKEN=1"
+
     nginx:
         ports:
             - "80:80"
@@ -13,6 +20,11 @@ services:
     mysql:
         ports:
             - "3306:3306"
+        environment:
+          - "MYSQL_ROOT_PASSWORD=root"
+          - "MYSQL_USER=project"
+          - "MYSQL_PASSWORD=project"
+          - "MYSQL_DATABASE=project"
 
     maildev:
         ports:
