@@ -8,6 +8,8 @@ services:
         build: docker/php
         volumes:
             - "./:/project"
+            - "./docker/php/conf/php-fpm.conf:/etc/php-fpm.conf"
+            - "./docker/php/conf/php.ini:/usr/local/etc/php/conf.d/100-php.ini"
         depends_on:
             - mysql
             - maildev
@@ -16,27 +18,29 @@ services:
         build: docker/nginx
         volumes:
             - "./:/project"
+            - "./docker/nginx/conf/project.conf:/etc/nginx/conf.d/default.conf"
         depends_on:
             - php
+
+#    httpd:
+#        build: docker/httpd
+#        volumes:
+#            - "./:/project"
+#            - "./docker/httpd/conf/project.conf:/usr/local/apache2/conf/extra/100-project-vhost.conf"
+#        depends_on:
+#            - php
+
+    mysql:
+        build: docker/mysql
+        volumes:
+            - "./docker/mysql/conf/custom.cnf:/etc/mysql/conf.d/custom.cnf"
 
     node:
         build: docker/node
         volumes:
             - "./:/project"
 
-    mysql:
-        build: docker/mysql
-
-    # ALTERNATIVES SERVICES
-
-#    httpd:
-#        build: docker/httpd
-#        volumes:
-#            - "./:/project"
-#        depends_on:
-#            - php
-
-    # DEVELOPMENT TOOLS SERVICES
+    # DEVELOPMENT SERVICES
 
     maildev:
         image: djfarrelly/maildev

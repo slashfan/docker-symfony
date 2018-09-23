@@ -105,5 +105,5 @@ RUN useradd -ms /bin/bash project
 USER project
 WORKDIR /project
 
-COPY conf/php-fpm.conf /etc/php-fpm.conf
-COPY conf/php.ini /usr/local/etc/php/conf.d/100-php.ini
+#COPY conf/php-fpm.conf /etc/php-fpm.conf
+#COPY conf/php.ini /usr/local/etc/php/conf.d/100-php.ini

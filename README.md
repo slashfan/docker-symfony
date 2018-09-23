@@ -1,4 +1,3 @@
-
 Docker Symfony
 ==============
 
@@ -9,9 +8,9 @@ Docker Symfony
 | CONTAINER | NOTES |
 |--|--|
 | **PHP 7.2** | enabled |
-| **NGINX 1.12** | enabled |
+| **NGINX 1.14** | enabled |
 | **MYSQL 5.7** | enabled |
-| **NODE 8.11** | enabled |
+| **NODE 8.12** | enabled |
 | **MAILDEV** | enabled |
 
 | CONTAINER | NOTES |
@@ -38,6 +37,12 @@ $ docker-compose build --pull
 
 ```bash
 $ docker-compose up --build
+```
+
+#### Stop running containers
+
+```bash
+$ docker-compose stop
 ```
 
 #### Stop and remove containers, networks and volumes
@@ -74,7 +79,7 @@ $ docker-compose exec php composer install
 ```
 
 ### Interact with MySQL
-    
+
 #### From container
 
 ```bash
@@ -98,7 +103,7 @@ $ docker-compose exec mysql sh -c 'exec mysqldump -u"$MYSQL_USER" -p"$MYSQL_PASS
 
 Uncomment the **httpd section** of the *docker-compose.yml* file and adapt the mapped ports in the *docker-compose.override.yml* file.
 
-### Maildev access
+### Maildev UI access
 
     http://localhost:1080
 
