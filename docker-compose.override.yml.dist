@@ -30,6 +30,13 @@ services:
         ports:
             - "1080:80"
 
+#    blackfire:
+#        environment:
+#          - "BLACKFIRE_CLIENT_ID=1"
+#          - "BLACKFIRE_CLIENT_TOKEN=1"
+#          - "BLACKFIRE_SERVER_ID=1"
+#          - "BLACKFIRE_SERVER_TOKEN=1"
+
 #    phpmyadmin:
 #        ports:
 #            - "8080:80"
