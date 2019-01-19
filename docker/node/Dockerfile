@@ -1,4 +1,4 @@
-FROM node:8.12
+FROM node:10.15
 
 # Update npm to latest version
 RUN npm install -g npm
