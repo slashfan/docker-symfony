@@ -8,6 +8,9 @@ services:
 #          - "BLACKFIRE_CLIENT_TOKEN=1"
 #          - "BLACKFIRE_SERVER_ID=1"
 #          - "BLACKFIRE_SERVER_TOKEN=1"
+#        dns: # add google public dns servers
+#            - 8.8.8.8
+#            - 8.8.4.4
 
     nginx:
         ports:
