@@ -100,6 +100,11 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 #    && mv /tmp/blackfire/blackfire /usr/bin/blackfire \
 #    && rm -Rf /tmp/blackfire
 
+# Install Symfony Command
+RUN wget https://get.symfony.com/cli/installer -O - | bash \
+    && export PATH="$HOME/.symfony/bin:$PATH" \
+    && mv /root/.symfony/bin/symfony /usr/local/bin/symfony
+
 # Set PROJECT USER
 RUN useradd -ms /bin/bash project
 USER project
