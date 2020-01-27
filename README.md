@@ -7,10 +7,10 @@ Docker Symfony
 
 | CONTAINER | NOTES |
 |--|--|
-| **PHP 7.3** | enabled |
+| **PHP 7.4** | enabled |
 | **NGINX 1.16** | enabled |
 | **MYSQL 8.0** | enabled |
-| **NODE 10.16** | enabled |
+| **NODE 12** | enabled |
 | **MAILDEV** | enabled |
 
 | CONTAINER | NOTES |

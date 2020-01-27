@@ -1,4 +1,4 @@
-FROM php:7.3-fpm
+FROM php:7.4-fpm
 
 RUN apt-get update \
     && apt-get install -y git curl wget unzip
@@ -11,14 +11,14 @@ RUN rm /etc/localtime \
 # Install OPCACHE extension
 RUN docker-php-ext-install opcache
 
+# Install APCU extension
+RUN pecl install apcu \
+    && docker-php-ext-enable apcu
+
 # Install INTL extension
 RUN apt-get install -y libicu-dev \
     && docker-php-ext-configure intl \
     && docker-php-ext-install intl
-
-# Install APCU extension
-RUN pecl install apcu \
-    && docker-php-ext-enable apcu
 
 ## Install GD extension
 RUN apt-get update \
@@ -31,10 +31,10 @@ RUN apt-get update \
     libxslt-dev \
     libwebp-dev \
     && docker-php-ext-configure gd \
-    --with-freetype-dir=/usr/include/ \
-    --with-jpeg-dir=/usr/include/ \
-    --with-xpm-dir=/usr/include/ \
-    --with-webp-dir=/usr/include/ \
+    --with-freetype \
+    --with-jpeg \
+    --with-xpm \
+    --with-webp \
     && docker-php-ext-install gd
 
 # Install IMAGICK extension
@@ -46,16 +46,15 @@ RUN apt-get update \
 # Install EXIF extension
 RUN docker-php-ext-install exif
 
+# Install ZIP extension
+RUN apt-get install -y libzip-dev zip \
+  && docker-php-ext-install zip
+
 # Install MYSQLI extension
 RUN docker-php-ext-install mysqli
 
 # Install PDO MYSQL extension
 RUN docker-php-ext-install pdo_mysql
-
-# Install ZIP extension
-RUN apt-get install -y libzip-dev zip \
-  && docker-php-ext-configure zip --with-libzip \
-  && docker-php-ext-install zip
 
 # Install XSL extension
 RUN apt-get install -y libxslt-dev \
@@ -71,10 +70,6 @@ RUN docker-php-ext-install bcmath
 RUN apt-get install -y libgmp-dev \
     && docker-php-ext-install gmp
 
-# Install XDEBUG extension
-RUN pecl install xdebug \
-    && docker-php-ext-enable xdebug
-
 # Install MONGODB extension
 RUN apt-get install -y autoconf pkg-config libssl-dev \
     && pecl install mongodb \
@@ -84,8 +79,21 @@ RUN apt-get install -y autoconf pkg-config libssl-dev \
 RUN pecl install redis \
     && docker-php-ext-enable redis
 
+# Install XDEBUG extension
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
+
+## Install PCOV extension
+#RUN pecl install pcov \
+#    && docker-php-ext-enable pcov
+
 # Install COMPOSER
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Install SYMFONY BINARY
+RUN wget https://get.symfony.com/cli/installer -O - | bash \
+#    && export PATH="$HOME/.symfony/bin:$PATH" \
+    && mv ~/.symfony/bin/symfony /usr/local/bin/symfony
 
 # Install BLACKFIRE PROBE
 #RUN version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") \
@@ -99,11 +107,6 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 #    && curl -A "Docker" -L https://blackfire.io/api/v1/releases/client/linux_static/amd64 | tar zxp -C /tmp/blackfire \
 #    && mv /tmp/blackfire/blackfire /usr/bin/blackfire \
 #    && rm -Rf /tmp/blackfire
-
-# Install Symfony Command
-RUN wget https://get.symfony.com/cli/installer -O - | bash \
-    && export PATH="$HOME/.symfony/bin:$PATH" \
-    && mv /root/.symfony/bin/symfony /usr/local/bin/symfony
 
 # Set PROJECT USER
 RUN useradd -ms /bin/bash project
