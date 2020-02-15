@@ -7,7 +7,7 @@ services:
     php:
         build: docker/php
         volumes:
-            - "./:/project"
+            - "./:/home/project/app"
             - "./docker/php/conf/php-fpm.conf:/etc/php-fpm.conf"
             - "./docker/php/conf/php.ini:/usr/local/etc/php/conf.d/100-php.ini"
         depends_on:
@@ -17,18 +17,18 @@ services:
     nginx:
         build: docker/nginx
         volumes:
-            - "./:/project"
+            - "./:/home/project/app"
             - "./docker/nginx/conf/project.conf:/etc/nginx/conf.d/00-project.conf"
         depends_on:
             - php
 
-#    httpd:
-#        build: docker/httpd
-#        volumes:
-#            - "./:/project"
-#            - "./docker/httpd/conf/project.conf:/usr/local/apache2/conf/extra/00-project.conf"
-#        depends_on:
-#            - php
+    httpd:
+        build: docker/httpd
+        volumes:
+            - "./:/home/project/app"
+            - "./docker/httpd/conf/project.conf:/usr/local/apache2/conf/extra/00-project.conf"
+        depends_on:
+            - php
 
     mysql:
         build: docker/mysql
@@ -38,7 +38,7 @@ services:
     node:
         build: docker/node
         volumes:
-            - "./:/project"
+            - "./:/home/project/app"
 
     # DEVELOPMENT SERVICES
 

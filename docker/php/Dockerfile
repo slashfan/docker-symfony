@@ -92,7 +92,6 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 # Install SYMFONY BINARY
 RUN wget https://get.symfony.com/cli/installer -O - | bash \
-#    && export PATH="$HOME/.symfony/bin:$PATH" \
     && mv ~/.symfony/bin/symfony /usr/local/bin/symfony
 
 # Install BLACKFIRE PROBE
@@ -108,10 +107,10 @@ RUN wget https://get.symfony.com/cli/installer -O - | bash \
 #    && mv /tmp/blackfire/blackfire /usr/bin/blackfire \
 #    && rm -Rf /tmp/blackfire
 
-# Set PROJECT USER
+# Set USER
 RUN useradd -ms /bin/bash project
 USER project
-WORKDIR /project
+WORKDIR /home/project/app
 
 #COPY conf/php-fpm.conf /etc/php-fpm.conf
 #COPY conf/php.ini /usr/local/etc/php/conf.d/100-php.ini
