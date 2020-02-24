@@ -3,7 +3,7 @@ Docker Symfony
 
 **Starting point** Docker configuration for **Symfony** and other PHP projects (*drupal*, *wordpress*...). 
 
-### What's inside ?
+### What's inside
 
 | CONTAINER | NOTES |
 |--|--|
@@ -19,7 +19,21 @@ Docker Symfony
 | BLACKFIRE | optional, disabled |
 | PHPMYADMIN | optional, disabled |
 
-### How to use this repository ?
+### How to quickly start and test the project
+
+On first run :
+
+```bash
+$ make install
+```
+
+On next runs :
+
+```bash
+$ make start
+```
+
+### How to use it in your own project
 
  1. **Copy** this repository files and directory at the root of your php project.
  2. **Copy** the *docker-compose.override.yml.dist* file to *docker-compose.override.yml*.

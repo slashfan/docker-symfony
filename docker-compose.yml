@@ -22,13 +22,13 @@ services:
         depends_on:
             - php
 
-    httpd:
-        build: docker/httpd
-        volumes:
-            - "./:/home/project/app"
-            - "./docker/httpd/conf/project.conf:/usr/local/apache2/conf/extra/00-project.conf"
-        depends_on:
-            - php
+#    httpd:
+#        build: docker/httpd
+#        volumes:
+#            - "./:/home/project/app"
+#            - "./docker/httpd/conf/project.conf:/usr/local/apache2/conf/extra/00-project.conf"
+#        depends_on:
+#            - php
 
     mysql:
         build: docker/mysql
