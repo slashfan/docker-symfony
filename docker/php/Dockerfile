@@ -88,7 +88,7 @@ RUN pecl install xdebug \
 #    && docker-php-ext-enable pcov
 
 # Install COMPOSER
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+COPY --from=composer:1 /usr/bin/composer /usr/local/bin/composer
 
 # Install SYMFONY BINARY
 RUN wget https://get.symfony.com/cli/installer -O - | bash \
