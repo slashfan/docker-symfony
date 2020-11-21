@@ -56,6 +56,11 @@ RUN docker-php-ext-install mysqli
 # Install PDO MYSQL extension
 RUN docker-php-ext-install pdo_mysql
 
+# Install PDO PGSQL extension
+RUN apt-get update \
+    && apt-get install -y libpq-dev \
+    && docker-php-ext-install pdo_pgsql
+
 # Install XSL extension
 RUN apt-get install -y libxslt-dev \
     && docker-php-ext-install xsl
