@@ -1,12 +1,14 @@
 FROM php:7.4-fpm
 
-RUN apt-get update \
-    && apt-get install -y git curl wget unzip
-
 # Set TIMEZONE
 RUN rm /etc/localtime \
     && ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime \
     && "date"
+
+# Install TOOLS
+RUN apt-get update \
+    && apt-get install -y git curl wget unzip \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install OPCACHE extension
 RUN docker-php-ext-install opcache
@@ -16,9 +18,11 @@ RUN pecl install apcu \
     && docker-php-ext-enable apcu
 
 # Install INTL extension
-RUN apt-get install -y libicu-dev \
+RUN apt-get update \
+    && apt-get install -y libicu-dev \
     && docker-php-ext-configure intl \
-    && docker-php-ext-install intl
+    && docker-php-ext-install intl \
+    && rm -rf /var/lib/apt/lists/*
 
 ## Install GD extension
 RUN apt-get update \
@@ -35,20 +39,24 @@ RUN apt-get update \
     --with-jpeg \
     --with-xpm \
     --with-webp \
-    && docker-php-ext-install gd
+    && docker-php-ext-install gd \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install IMAGICK extension
 RUN apt-get update \
     && apt-get install -y libmagickwand-dev --no-install-recommends \
     && pecl install imagick \
-    && docker-php-ext-enable imagick
+    && docker-php-ext-enable imagick \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install EXIF extension
 RUN docker-php-ext-install exif
 
 # Install ZIP extension
-RUN apt-get install -y libzip-dev zip \
-  && docker-php-ext-install zip
+RUN apt-get update \
+    && apt-get install -y libzip-dev zip \
+    && docker-php-ext-install zip \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install MYSQLI extension
 RUN docker-php-ext-install mysqli
@@ -59,11 +67,14 @@ RUN docker-php-ext-install pdo_mysql
 # Install PDO PGSQL extension
 RUN apt-get update \
     && apt-get install -y libpq-dev \
-    && docker-php-ext-install pdo_pgsql
+    && docker-php-ext-install pdo_pgsql \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install XSL extension
-RUN apt-get install -y libxslt-dev \
-    && docker-php-ext-install xsl
+RUN apt-get update \
+    && apt-get install -y libxslt-dev \
+    && docker-php-ext-install xsl \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install SOAP extension
 RUN docker-php-ext-install soap
@@ -72,13 +83,17 @@ RUN docker-php-ext-install soap
 RUN docker-php-ext-install bcmath
 
 # Install GMP extension
-RUN apt-get install -y libgmp-dev \
-    && docker-php-ext-install gmp
+RUN apt-get update \
+    && apt-get install -y libgmp-dev \
+    && docker-php-ext-install gmp \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install MONGODB extension
-RUN apt-get install -y autoconf pkg-config libssl-dev \
+RUN apt-get update \
+    && apt-get install -y autoconf pkg-config libssl-dev \
     && pecl install mongodb \
-    && docker-php-ext-enable mongodb
+    && docker-php-ext-enable mongodb \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install REDIS extension
 RUN pecl install redis \
@@ -93,7 +108,7 @@ RUN pecl install xdebug \
 #    && docker-php-ext-enable pcov
 
 # Install COMPOSER
-COPY --from=composer:1 /usr/bin/composer /usr/local/bin/composer
+COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
 
 # Install SYMFONY BINARY
 RUN wget https://get.symfony.com/cli/installer -O - | bash \

@@ -8,9 +8,9 @@ Docker Symfony
 | CONTAINER | NOTES |
 |--|--|
 | **PHP 7.4** | enabled |
-| **NGINX 1.16** | enabled |
+| **NGINX 1.18** | enabled |
 | **MYSQL 8.0** | enabled |
-| **NODE 12** | enabled |
+| **NODE 14** | enabled |
 | **MAILDEV** | enabled |
 
 | CONTAINER | NOTES |
@@ -41,7 +41,7 @@ $ make start
 
 ### Docker commands cheatsheet
     
-#### Build containers (and pull latest images)
+#### Build containers (and pull the latest images)
 
 ```bash
 $ docker-compose build --pull
