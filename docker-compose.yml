@@ -7,9 +7,8 @@ services:
     php:
         build: docker/php
         volumes:
-            - "./:/home/project/app"
-            - "./docker/php/conf/php-fpm.conf:/etc/php-fpm.conf"
-            - "./docker/php/conf/php.ini:/usr/local/etc/php/conf.d/100-php.ini"
+            - "./:/home/project/code"
+            - "project_composer:/home/project/.composer"
         depends_on:
             - mysql
             - maildev
@@ -17,28 +16,24 @@ services:
     nginx:
         build: docker/nginx
         volumes:
-            - "./:/home/project/app"
-            - "./docker/nginx/conf/project.conf:/etc/nginx/conf.d/00-project.conf"
+            - "./:/home/project/code"
         depends_on:
             - php
 
 #    httpd:
 #        build: docker/httpd
 #        volumes:
-#            - "./:/home/project/app"
-#            - "./docker/httpd/conf/project.conf:/usr/local/apache2/conf/extra/00-project.conf"
+#            - "./:/home/project/code"
 #        depends_on:
 #            - php
 
     mysql:
         build: docker/mysql
-        volumes:
-            - "./docker/mysql/conf/custom.cnf:/etc/mysql/conf.d/custom.cnf"
 
     node:
         build: docker/node
         volumes:
-            - "./:/home/project/app"
+            - "./:/home/project/code"
 
     # DEVELOPMENT SERVICES
 
@@ -48,9 +43,5 @@ services:
 #    blackfire:
 #        image: blackfire/blackfire
 
-#    phpmyadmin:
-#        image: phpmyadmin/phpmyadmin:4.7
-#        depends_on:
-#            - mysql
-#        links:
-#            - "mysql:db"
+volumes:
+    project_composer:

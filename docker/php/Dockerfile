@@ -127,10 +127,14 @@ RUN wget https://get.symfony.com/cli/installer -O - | bash \
 #    && mv /tmp/blackfire/blackfire /usr/bin/blackfire \
 #    && rm -Rf /tmp/blackfire
 
-# Set USER
+# Set PROJECT USER
 RUN useradd -ms /bin/bash project
 USER project
-WORKDIR /home/project/app
 
-#COPY conf/php-fpm.conf /etc/php-fpm.conf
-#COPY conf/php.ini /usr/local/etc/php/conf.d/100-php.ini
+# Set PROJECT DIRECTORIES
+RUN mkdir -p /home/project/code
+RUN mkdir -p /home/project/.composer
+WORKDIR /home/project/code
+
+COPY conf/php-fpm.conf /etc/php-fpm.conf
+COPY conf/php.ini /usr/local/etc/php/conf.d/100-php.ini

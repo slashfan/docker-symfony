@@ -148,6 +148,7 @@ $ blackfire curl http://nginx
 
 ### phpMyAdmin 
 
-A tool like MySQL Workbench would be better but if you really want it uncomment the **phpmyadmin section** in the *docker-compose.yml* file.
+A tool like MySQL Workbench would be better but if you really want it uncomment 
+the **phpmyadmin section** in the *docker-compose.override(.dist).yml* file.
 
     http://localhost:8080

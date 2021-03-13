@@ -7,6 +7,6 @@ RUN npm install -g npm
 RUN groupmod -g 999 node && usermod -u 999 -g 999 node
 RUN useradd -ms /bin/bash project
 USER project
-WORKDIR /home/project/app
+WORKDIR /home/project/code
 
 CMD tail -f /dev/null

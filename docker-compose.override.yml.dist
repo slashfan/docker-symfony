@@ -41,5 +41,10 @@ services:
 #          - "BLACKFIRE_SERVER_TOKEN=1"
 
 #    phpmyadmin:
+#        image: phpmyadmin/phpmyadmin:4.7
+#        depends_on:
+#            - mysql
+#        links:
+#            - "mysql:db"
 #        ports:
 #            - "8080:80"
