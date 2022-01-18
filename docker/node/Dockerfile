@@ -1,4 +1,4 @@
-FROM node:14
+FROM node:lts
 
 # Update NPM
 RUN npm install -g npm

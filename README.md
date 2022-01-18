@@ -8,9 +8,9 @@ Docker Symfony
 | CONTAINER | NOTES |
 |--|--|
 | **PHP 7.4** | enabled |
-| **NGINX 1.18** | enabled |
+| **NGINX 1.20** | enabled |
 | **MYSQL 8.0** | enabled |
-| **NODE 14** | enabled |
+| **NODE 16** | enabled |
 | **MAILDEV** | enabled |
 
 | CONTAINER | NOTES |
